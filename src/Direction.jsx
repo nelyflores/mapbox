@@ -1,11 +1,8 @@
 import React from "react";
 import mapboxgl from "mapbox-gl";
-import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions";
-import "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css";
-
 import "./index.less";
 
-mapboxgl.accessToken = process.env.REACT_APP_MABOX_TOKEN;
+mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
 const infoZones = [
   { id: 1, nameZone: "Metropolitana Oriente", color: "#33C15D" },
   { id: 2, nameZone: "Metropolitana Centro", color: "#FC3030" },
@@ -17,7 +14,7 @@ var popup = new mapboxgl.Popup({
   closeOnClick: false
 });
 
-class App extends React.Component {
+class MapData extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,7 +29,6 @@ class App extends React.Component {
     const tilesetSource = process.env.REACT_APP_MAPBOX_TILESET_ID;
     const sourceLayer = process.env.REACT_APP_MAPBOX_SOURCE_LAYER;
     const map = new mapboxgl.Map({
-      accessToken: mapboxgl.accessToken,
       container: this.mapContainer,
       style: "mapbox://styles/mapbox/streets-v11",
       center: [lng, lat],
@@ -47,8 +43,8 @@ class App extends React.Component {
     );
   }
   render() {
-    return <div ref={el => (this.mapContainer = el)} />;
+    return <div ref={el => (this.mapContainer = el)} style={style} />;
   }
 }
 
-export default App;
+export { MapData };
